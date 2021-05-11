@@ -1,0 +1,40 @@
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "moderator99",
+  "email": "moderator99@spring.com",
+  "password": "123456",
+  "roles": [
+    "moderator",
+    "user"
+  ]
+}
+
+###
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "admin11",
+  "email": "admin11@spring.com",
+  "password": "123456",
+  "roles": [
+    "admin"
+  ]
+}
+
+###
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "user3",
+  "email": "user3@spring.com",
+  "password": "123456",
+  "roles": [
+    "user"
+  ]
+}
+
+###

@@ -1,0 +1,16 @@
+GET http://localhost:8080/api/test/all
+
+###
+GET http://localhost:8080/api/test/user
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtb2RlcmF0b3I5OSIsImV4cCI6MTYyMDc3MzA0NiwiaWF0IjoxNjIwNzY5NDQ2fQ.wJjJ_GmCtKnUZA_Foi0-KFZUpuGP78pBOpS3Oi_YPOU
+
+###
+GET http://localhost:8080/api/test/moderator
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtb2RlcmF0b3I5OSIsImV4cCI6MTYyMDc3MzA0NiwiaWF0IjoxNjIwNzY5NDQ2fQ.wJjJ_GmCtKnUZA_Foi0-KFZUpuGP78pBOpS3Oi_YPOU
+
+###
+
+GET http://localhost:8080/api/test/admin
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjExIiwiZXhwIjoxNjIwNzczMDk0LCJpYXQiOjE2MjA3Njk0OTR9.YIN4-Xi79jH3hr2pJPOHJqMuXOYz68M-knNhJ1OfD7A
+
+###
