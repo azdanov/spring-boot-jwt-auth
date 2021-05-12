@@ -10,6 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface RoleRepository extends CrudRepository<Role, Long> {
-    @EntityGraph(attributePaths = "users")
+    @EntityGraph(attributePaths = {"users"})
     Optional<Role> findByName(RoleEnum name);
 }

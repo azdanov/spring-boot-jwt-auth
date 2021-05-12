@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 @Transactional(readOnly = true)
 public interface UserRepository extends CrudRepository<User, Long> {
-    @EntityGraph(attributePaths = "roles")
+    @EntityGraph(attributePaths = {"roles"})
     Optional<User> findByUsername(String username);
 
     boolean existsByUsername(String username);
