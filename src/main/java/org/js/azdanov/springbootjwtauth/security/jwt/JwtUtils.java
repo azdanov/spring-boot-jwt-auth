@@ -5,7 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
-import org.js.azdanov.springbootjwtauth.configuration.JWTProperties;
+import org.js.azdanov.springbootjwtauth.properties.JWTProperties;
 import org.js.azdanov.springbootjwtauth.security.services.UserDetailsImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,10 +31,10 @@ public class JwtUtils {
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
 
         return JWT.create()
-                .withSubject((userPrincipal.getUsername()))
-                .withIssuedAt(new Date())
-                .withExpiresAt(new Date((new Date()).getTime() + jwtProperties.getExpiration().toMillis()))
-                .sign(algorithm);
+            .withSubject((userPrincipal.getUsername()))
+            .withIssuedAt(new Date())
+            .withExpiresAt(new Date((new Date()).getTime() + jwtProperties.getExpiration().toMillis()))
+            .sign(algorithm);
     }
 
     public String getUsernameFromToken(String token) {

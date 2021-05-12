@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
 @SpringBootApplication
-@ConfigurationPropertiesScan("org.js.azdanov.springbootjwtauth.configuration")
+@ConfigurationPropertiesScan("org.js.azdanov.springbootjwtauth.properties")
 public class SpringBootJwtAuthApplication {
 
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package org.js.azdanov.springbootjwtauth.configuration;
+package org.js.azdanov.springbootjwtauth.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConstructorBinding;

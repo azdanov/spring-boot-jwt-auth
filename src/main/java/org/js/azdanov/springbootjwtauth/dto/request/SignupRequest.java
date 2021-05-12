@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class SignupRequest {
@@ -16,6 +17,7 @@ public class SignupRequest {
     @Email
     private String email;
 
+    @NotNull
     private Set<String> roles;
 
     @NotBlank

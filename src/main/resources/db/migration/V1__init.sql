@@ -2,7 +2,8 @@ CREATE TABLE IF NOT EXISTS hibernate_sequence
 (
     next_val BIGINT NULL
 );
-INSERT INTO hibernate_sequence (next_val) VALUES (0);
+INSERT INTO hibernate_sequence (next_val)
+VALUES (1);
 
 CREATE TABLE IF NOT EXISTS users
 (

@@ -11,6 +11,6 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtb2RlcmF0b
 ###
 
 GET http://localhost:8080/api/test/admin
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjExIiwiZXhwIjoxNjIwNzczMDk0LCJpYXQiOjE2MjA3Njk0OTR9.YIN4-Xi79jH3hr2pJPOHJqMuXOYz68M-knNhJ1OfD7A
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjExIiwiZXhwIjoxNjIwODM4NjM4LCJpYXQiOjE2MjA4MzUwMzh9.OZek_Pm1aC8B_7R-GlNl5YHBH3Gzvhm3nvD6uTWOyrc
 
 ###
