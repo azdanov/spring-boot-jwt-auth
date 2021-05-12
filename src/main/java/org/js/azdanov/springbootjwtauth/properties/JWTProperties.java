@@ -14,10 +14,13 @@ public class JWTProperties {
     private final String secret;
     @NotBlank
     private final Duration expiration;
+    @NotBlank
+    private final Duration refreshExpiration;
 
-    public JWTProperties(String secret, Duration expiration) {
+    public JWTProperties(String secret, Duration expiration, Duration refreshExpiration) {
         this.secret = secret;
         this.expiration = expiration;
+        this.refreshExpiration = refreshExpiration;
     }
 
     public String getSecret() {
@@ -26,5 +29,9 @@ public class JWTProperties {
 
     public Duration getExpiration() {
         return expiration;
+    }
+
+    public Duration getRefreshExpiration() {
+        return refreshExpiration;
     }
 }

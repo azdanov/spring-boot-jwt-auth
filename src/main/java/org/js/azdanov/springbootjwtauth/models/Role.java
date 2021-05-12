@@ -1,5 +1,6 @@
 package org.js.azdanov.springbootjwtauth.models;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.js.azdanov.springbootjwtauth.models.enums.RoleEnum;
 
 import java.util.Collection;
@@ -18,7 +19,8 @@ import javax.persistence.Table;
 @Entity
 public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
     private Long id;
 
     @Enumerated(EnumType.STRING)

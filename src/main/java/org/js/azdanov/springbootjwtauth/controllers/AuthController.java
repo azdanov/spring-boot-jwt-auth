@@ -2,14 +2,19 @@ package org.js.azdanov.springbootjwtauth.controllers;
 
 import org.js.azdanov.springbootjwtauth.dto.request.LoginRequest;
 import org.js.azdanov.springbootjwtauth.dto.request.SignupRequest;
+import org.js.azdanov.springbootjwtauth.dto.request.TokenRefreshRequest;
 import org.js.azdanov.springbootjwtauth.dto.response.JwtResponse;
 import org.js.azdanov.springbootjwtauth.dto.response.MessageResponse;
+import org.js.azdanov.springbootjwtauth.dto.response.TokenRefreshResponse;
+import org.js.azdanov.springbootjwtauth.models.RefreshToken;
 import org.js.azdanov.springbootjwtauth.models.Role;
 import org.js.azdanov.springbootjwtauth.models.User;
 import org.js.azdanov.springbootjwtauth.models.enums.RoleEnum;
 import org.js.azdanov.springbootjwtauth.repository.RoleRepository;
 import org.js.azdanov.springbootjwtauth.repository.UserRepository;
+import org.js.azdanov.springbootjwtauth.security.exception.TokenRefreshException;
 import org.js.azdanov.springbootjwtauth.security.jwt.JwtUtils;
+import org.js.azdanov.springbootjwtauth.security.services.RefreshTokenService;
 import org.js.azdanov.springbootjwtauth.security.services.UserDetailsImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -40,13 +45,21 @@ public class AuthController {
     private final RoleRepository roleRepository;
     private final PasswordEncoder encoder;
     private final JwtUtils jwtUtils;
+    private final RefreshTokenService refreshTokenService;
 
-    public AuthController(AuthenticationManager authenticationManager, UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder encoder, JwtUtils jwtUtils) {
+    public AuthController(
+        AuthenticationManager authenticationManager,
+        UserRepository userRepository,
+        RoleRepository roleRepository,
+        PasswordEncoder encoder,
+        JwtUtils jwtUtils,
+        RefreshTokenService refreshTokenService) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.encoder = encoder;
         this.jwtUtils = jwtUtils;
+        this.refreshTokenService = refreshTokenService;
     }
 
     @PostMapping("/login")
@@ -63,13 +76,31 @@ public class AuthController {
             .map(GrantedAuthority::getAuthority)
             .collect(Collectors.toList());
 
+        RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
+
         return ResponseEntity.ok(
             new JwtResponse(
                 jwt,
+                refreshToken.getToken(),
                 userDetails.getId(),
                 userDetails.getUsername(),
                 userDetails.getEmail(),
                 roles));
+    }
+
+    @PostMapping("/refreshtoken")
+    public ResponseEntity<TokenRefreshResponse> refreshtoken(@Valid @RequestBody TokenRefreshRequest request) {
+        String requestRefreshToken = request.getRefreshToken();
+
+        return refreshTokenService.findByToken(requestRefreshToken)
+            .map(refreshTokenService::verifyExpiration)
+            .map(RefreshToken::getUser)
+            .map(user -> {
+                String token = jwtUtils.generateWithSubject(user.getUsername());
+                return ResponseEntity.ok(new TokenRefreshResponse(token, requestRefreshToken));
+            })
+            .orElseThrow(() -> new TokenRefreshException(requestRefreshToken,
+                "Refresh token is not in database!"));
     }
 
     @PostMapping("/register")

@@ -29,9 +29,12 @@ public class JwtUtils {
 
     public String generateToken(Authentication authentication) {
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
+        return generateWithSubject(userPrincipal.getUsername());
+    }
 
+    public String generateWithSubject(String subject) {
         return JWT.create()
-            .withSubject((userPrincipal.getUsername()))
+            .withSubject((subject))
             .withIssuedAt(new Date())
             .withExpiresAt(new Date((new Date()).getTime() + jwtProperties.getExpiration().toMillis()))
             .sign(algorithm);
